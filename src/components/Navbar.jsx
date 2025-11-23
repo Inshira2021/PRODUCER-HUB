@@ -1,0 +1,117 @@
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+function Navbar({ onToggleSidebar, searchQuery, onSearchChange }) {
+  const navigate = useNavigate();
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+
+  return (
+    <nav className="bg-gradient-to-r from-amber-900/90 via-orange-900/90 to-amber-950/90 backdrop-blur-xl border-b border-amber-700/30 sticky top-0 z-50 shadow-lg shadow-black/20">
+      <div className="px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 gap-4">
+          {/* Left: Hamburger Menu & Logo */}
+          <div className="flex items-center space-x-3">
+            <button
+              onClick={onToggleSidebar}
+              className="p-2 rounded-lg text-amber-200 hover:bg-amber-700/30 transition-colors focus:outline-none"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            
+            <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-amber-300 to-orange-400 bg-clip-text text-transparent whitespace-nowrap">
+              Producer Hub
+            </span>
+          </div>
+
+          {/* Center: Search Bar */}
+          <div className="flex-1 max-w-2xl mx-4 hidden md:block">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search movies..."
+                value={searchQuery || ''}
+                onChange={(e) => onSearchChange?.(e.target.value)}
+                className="w-full px-4 py-2 pl-10 bg-black/30 backdrop-blur-lg border border-amber-600/40 rounded-full text-white placeholder-amber-300/50 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-all"
+              />
+              <svg
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-amber-400/60"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Right: Bell Icon & Profile */}
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            {/* Bell Icon */}
+            <button className="p-2 rounded-full text-amber-200 hover:bg-amber-700/30 transition-colors relative">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+              {/* Notification badge */}
+              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+            </button>
+
+            {/* Profile Icon */}
+            <div className="relative">
+              <button
+                onClick={() => setShowProfileMenu(!showProfileMenu)}
+                className="p-2 rounded-full text-amber-200 hover:bg-amber-700/30 transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </button>
+
+              {/* Profile Dropdown */}
+              {showProfileMenu && (
+                <div className="absolute right-0 mt-2 w-48 bg-gradient-to-br from-amber-900/95 to-orange-950/95 backdrop-blur-xl rounded-lg border border-amber-700/30 shadow-xl">
+                  <button
+                    onClick={() => {
+                      navigate('/login');
+                      setShowProfileMenu(false);
+                    }}
+                    className="w-full text-left px-4 py-3 text-amber-200 hover:bg-amber-700/30 transition-colors rounded-lg flex items-center space-x-2"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    <span>Logout</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Search Bar */}
+        <div className="pb-3 md:hidden">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search movies..."
+              value={searchQuery || ''}
+              onChange={(e) => onSearchChange?.(e.target.value)}
+              className="w-full px-4 py-2 pl-10 bg-black/30 backdrop-blur-lg border border-amber-600/40 rounded-full text-white placeholder-amber-300/50 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-all"
+            />
+            <svg
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-amber-400/60"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+export default Navbar;
