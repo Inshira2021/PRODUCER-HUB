@@ -6,7 +6,7 @@ function Sidebar({ isOpen }) {
 
   return (
     <aside
-      className={`fixed left-0 top-16 h-[calc(100vh-4rem)] bg-gradient-to-b from-zinc-900/95 to-black/95 backdrop-blur-xl border-r border-amber-700/20 transition-transform duration-300 z-40 ${
+      className={`fixed left-0 top-16 h-[calc(100vh-4rem)] bg-gray-800 border-r border-gray-700 transition-transform duration-300 z-40 ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       } w-64 shadow-2xl`}
     >
@@ -16,7 +16,7 @@ function Sidebar({ isOpen }) {
           className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
             isActive('/dashboard')
               ? 'bg-amber-600 text-white'
-              : 'text-amber-200 hover:bg-amber-700/20'
+              : 'text-gray-300 hover:bg-gray-700'
           }`}
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -30,7 +30,7 @@ function Sidebar({ isOpen }) {
           className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
             isActive('/projects')
               ? 'bg-amber-600 text-white'
-              : 'text-amber-200 hover:bg-amber-700/20'
+              : 'text-gray-300 hover:bg-gray-700'
           }`}
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

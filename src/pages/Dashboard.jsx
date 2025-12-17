@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
-import Footer from '../components/Footer';
 import MovieCard from '../components/MovieCard';
 
 function Dashboard() {
@@ -25,8 +24,15 @@ function Dashboard() {
     movie.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Handle delete movie
+  const handleDeleteMovie = (movieId) => {
+    const updatedMovies = movies.filter(m => m.id !== movieId);
+    setMovies(updatedMovies);
+    localStorage.setItem('movies', JSON.stringify(updatedMovies));
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-black via-zinc-900 to-black">
+    <div className="min-h-screen flex flex-col bg-gray-900">
       {/* Navbar */}
       <Navbar 
         onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -51,10 +57,10 @@ function Dashboard() {
           {/* Header with Add Button */}
           <div className="flex justify-between items-center mb-6 sm:mb-8">
             <div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent mb-2">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-2">
                 My Movies
               </h1>
-              <p className="text-zinc-400 text-sm sm:text-base">
+              <p className="text-gray-400 text-sm sm:text-base">
                 {filteredMovies.length} {filteredMovies.length === 1 ? 'movie' : 'movies'} found
               </p>
             </div>
@@ -75,20 +81,20 @@ function Dashboard() {
           {filteredMovies.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {filteredMovies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
+                <MovieCard key={movie.id} movie={movie} onDelete={handleDeleteMovie} />
               ))}
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-16 sm:py-24">
-              <div className="bg-gradient-to-br from-amber-900/20 to-orange-900/20 backdrop-blur-sm rounded-full p-8 mb-6">
-                <svg className="w-16 h-16 sm:w-24 sm:h-24 text-amber-500/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-gray-800 rounded-full p-8 mb-6">
+                <svg className="w-16 h-16 sm:w-24 sm:h-24 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
                 </svg>
               </div>
-              <p className="text-zinc-300 text-xl mb-2">
+              <p className="text-white text-xl mb-2">
                 {searchQuery ? 'No movies match your search' : 'No movies yet'}
               </p>
-              <p className="text-zinc-500 text-sm mb-6">
+              <p className="text-gray-400 text-sm mb-6">
                 {searchQuery ? 'Try a different search term' : 'Start building your collection'}
               </p>
               {!searchQuery && (
@@ -103,9 +109,6 @@ function Dashboard() {
           )}
         </div>
       </main>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }

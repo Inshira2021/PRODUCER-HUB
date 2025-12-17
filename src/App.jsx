@@ -5,6 +5,9 @@ import Projects from './pages/Projects';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import AddMovie from './pages/AddMovie';
+import MovieDetail from './pages/MovieDetail';
+import AddTrailer from './pages/AddTrailer';
+import TrailerDetail from './pages/TrailerDetail';
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/add-movie" element={<AddMovie />} />
+        <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/movie/:id/add-trailer" element={<AddTrailer />} />
+        <Route path="/movie/:id/trailer/:trailerId" element={<TrailerDetail />} />
         
         {/* 404 catch-all */}
         <Route path="*" element={<Navigate to="/login" replace />} />
