@@ -181,12 +181,12 @@ function TrailerDetail() {
           {/* Back Button */}
           <button
             onClick={() => navigate(`/movie/${movie.slug || movie.id}`)}
-            className="flex items-center space-x-2 text-zinc-400 hover:text-amber-400 mb-6 transition-colors group"
+            className="group flex items-center space-x-2 px-3 py-2 rounded-lg text-gray-400 hover:text-amber-600 hover:bg-gray-800/50 mb-6 transition-all duration-200"
           >
-            <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            <span className="font-medium">Back to Movie</span>
+            <span>Back</span>
           </button>
 
           {/* Trailer Video Section - Centered and Smaller */}
