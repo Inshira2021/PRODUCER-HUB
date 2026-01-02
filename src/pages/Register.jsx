@@ -26,8 +26,39 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Register:', formData);
-    // Simulate successful registration
+    
+    // Validate password match
+    if (formData.password !== formData.confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+    
+    // Save user data to localStorage
+    const userData = {
+      first_name: formData.first_name,
+      last_name: formData.last_name,
+      nickname: formData.nickname,
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+      contact_number: formData.contact_number,
+      country: formData.country,
+      address: formData.address,
+      city: formData.city,
+      state: formData.state,
+      postal_code: formData.postal_code,
+      dob: formData.dob,
+      nic_number: formData.nic_number,
+      nic_front_url: formData.nic_front_url,
+      nic_back_url: formData.nic_back_url,
+      profile_pic: formData.profile_pic,
+      registered_at: new Date().toISOString()
+    };
+    
+    // Store in localStorage
+    localStorage.setItem('registeredUser', JSON.stringify(userData));
+    
+    alert('Registration successful!');
     navigate('/login');
   };
 
